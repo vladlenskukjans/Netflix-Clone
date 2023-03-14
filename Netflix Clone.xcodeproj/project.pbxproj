@@ -18,6 +18,10 @@
 		248B304929BF81C800EBAD36 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248B304829BF81C800EBAD36 /* DownloadsViewController.swift */; };
 		248B305029BF8E0400EBAD36 /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248B304F29BF8E0400EBAD36 /* CollectionViewTableViewCell.swift */; };
 		248B305229BF9A1900EBAD36 /* HeroHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248B305129BF9A1900EBAD36 /* HeroHeaderUIView.swift */; };
+		248B305429C06F4000EBAD36 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248B305329C06F4000EBAD36 /* APICaller.swift */; };
+		248B305629C07AD000EBAD36 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248B305529C07AD000EBAD36 /* MovieModel.swift */; };
+		248B305829C0865000EBAD36 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248B305729C0865000EBAD36 /* Extensions.swift */; };
+		248B305A29C08C5B00EBAD36 /* TVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248B305929C08C5B00EBAD36 /* TVModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		248B304829BF81C800EBAD36 /* DownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		248B304F29BF8E0400EBAD36 /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CollectionViewTableViewCell.swift; path = Models/CollectionViewTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		248B305129BF9A1900EBAD36 /* HeroHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroHeaderUIView.swift; sourceTree = "<group>"; };
+		248B305329C06F4000EBAD36 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		248B305529C07AD000EBAD36 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
+		248B305729C0865000EBAD36 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		248B305929C08C5B00EBAD36 /* TVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +120,8 @@
 		248B304C29BF8D3400EBAD36 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				248B305529C07AD000EBAD36 /* MovieModel.swift */,
+				248B305929C08C5B00EBAD36 /* TVModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -119,6 +129,7 @@
 		248B304D29BF8DA100EBAD36 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				248B305729C0865000EBAD36 /* Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -126,6 +137,7 @@
 		248B304E29BF8DB800EBAD36 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				248B305329C06F4000EBAD36 /* APICaller.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -200,11 +212,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				248B305629C07AD000EBAD36 /* MovieModel.swift in Sources */,
 				248B304729BF81A400EBAD36 /* SearchViewController.swift in Sources */,
 				248B303229BF7DBE00EBAD36 /* MainTabBarViewController.swift in Sources */,
 				248B305029BF8E0400EBAD36 /* CollectionViewTableViewCell.swift in Sources */,
+				248B305429C06F4000EBAD36 /* APICaller.swift in Sources */,
 				248B305229BF9A1900EBAD36 /* HeroHeaderUIView.swift in Sources */,
+				248B305A29C08C5B00EBAD36 /* TVModel.swift in Sources */,
 				248B304929BF81C800EBAD36 /* DownloadsViewController.swift in Sources */,
+				248B305829C0865000EBAD36 /* Extensions.swift in Sources */,
 				248B302E29BF7DBE00EBAD36 /* AppDelegate.swift in Sources */,
 				248B303029BF7DBE00EBAD36 /* SceneDelegate.swift in Sources */,
 				248B304529BF818700EBAD36 /* UpcomingViewController.swift in Sources */,
