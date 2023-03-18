@@ -20,6 +20,10 @@ class HomeViewController: UIViewController {
     
     let sectionTitles = ["Trending Movies", "Trending Tv", "Popular", "Upcoming Movies", "Top Rated"]
     
+    private var randomTrendingMovie: Title?
+    private var headerView: HeroHeaderUIView?
+    
+    
     private let homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
@@ -35,17 +39,31 @@ class HomeViewController: UIViewController {
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
         
-        homeFeedTable.tableHeaderView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
+        headerView  = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
+        homeFeedTable.tableHeaderView = headerView
         
         configureNavBar()
-        
+        configureHeroheaderView()
     }
+    
+    private func configureHeroheaderView() {
+        APICaller.shared.getTrendingMovies { [weak self] result in
+            switch result {
+            case .success(let titles):
+                let selectedTitle = titles.randomElement()
+                self?.randomTrendingMovie = selectedTitle
+                self?.headerView?.configure(with: TitleViewModel(titleName: selectedTitle?.original_title ?? "" , posterURL: selectedTitle?.poster_path ?? ""))
+            case .failure(let eeror):
+                print(eeror.localizedDescription)
+            }
+        }
+    }
+    
     
     private func configureNavBar() {
         
         var image = UIImage(named: "nl")?.withRenderingMode(.alwaysOriginal)
         image = image?.withRenderingMode(.alwaysOriginal)
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image?.resizeTo(size: CGSize(width: 20, height: 30)), style: .done, target: self, action: nil)
         
         navigationItem.rightBarButtonItems = [
@@ -56,15 +74,10 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .white
     }
     
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         homeFeedTable.frame = view.bounds
     }
-    
-    
-    
 }
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -126,15 +139,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     print(error.localizedDescription)
                 }
             }
-            
-        default:
-            return UITableViewCell()
+        default: return UITableViewCell()
             
         }
+        cell.delegate = self
         return cell
-        
     }
-    
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         40
@@ -164,7 +174,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offSet))
     }
-    
 }
 
 // :MARK - Extension to resize UIImage ,to fit UIBarButtonItem
@@ -175,7 +184,22 @@ extension UIImage {
         let image = renderer.image { _ in
             self.draw(in: CGRect.init(origin: CGPoint.zero, size: size))
         }
-        
         return image.withRenderingMode(self.renderingMode)
     }
 }
+
+// CollectionViewTableViewCellDelegate Delegate
+extension HomeViewController: CollectionViewTableViewCellDelegate {
+    func collectionViewTableViewCellDidTapCell(_ cell: CollectionViewTableViewCell, viewModel: TitlePreviewVIewModel) {
+        DispatchQueue.main.async { [weak self] in
+            let vc = TitlePreviewViewController()
+            vc.configure(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+       
+    }
+    
+    
+}
+
