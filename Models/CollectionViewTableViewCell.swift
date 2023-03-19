@@ -59,16 +59,17 @@ class CollectionViewTableViewCell: UITableViewCell {
     }
     
     func downloadTitleAt(indexPath: IndexPath) {
-        print(indexPath)
-        
-       // DataPersistanceManager.shared.downloadTitleWith(model: title[indexPath.row], complition: <#T##(Result<Void, Error>) -> Void#>)
-//        print("downloading \(title.original_title)")
-//        print("Downloading \(title[indexPath.row].original_title )")
-        
+        DataPersistanceManager.shared.downloadTitleWith(model: title[indexPath.row]) { result in
+            switch result {
+            case .success():
+                NotificationCenter.default.post(name: NSNotification.Name("downloaded"), object: nil)
+                print("download complite to Database")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
-    
 }
-
 extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

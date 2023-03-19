@@ -13,14 +13,14 @@ class UpcomingViewController: UIViewController {
     private var titles = [Title]()
     
     private let upcomingTable: UITableView = {
-    let table = UITableView()
-    table.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.identifier)
-    return table
+        let table = UITableView()
+        table.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.identifier)
+        return table
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         view.backgroundColor = .systemBackground
         title = "Upcoming"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -38,7 +38,7 @@ class UpcomingViewController: UIViewController {
         super.viewDidLayoutSubviews()
         upcomingTable.frame = view.bounds
     }
-  
+    
     private func fetchUpcoming() {
         APICaller.shared.getUpcomingMovies { [weak self] result in
             switch result {
@@ -84,15 +84,14 @@ extension UpcomingViewController: UITableViewDataSource, UITableViewDelegate {
             switch result {
             case .success(let videoElement):
                 DispatchQueue.main.async {
-            let vc = TitlePreviewViewController()
-            vc.configure(with: TitlePreviewVIewModel(title: titleName, youtubeVideo: videoElement, titleOverview: title.overview ?? ""))
-            self?.navigationController?.pushViewController(vc, animated: true)
-        }
+                    let vc = TitlePreviewViewController()
+                    vc.configure(with: TitlePreviewVIewModel(title: titleName, youtubeVideo: videoElement, titleOverview: title.overview ?? ""))
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
                 
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
-        
     }
 }

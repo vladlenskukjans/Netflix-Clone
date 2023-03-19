@@ -196,10 +196,6 @@ extension HomeViewController: CollectionViewTableViewCellDelegate {
             vc.configure(with: viewModel)
             self?.navigationController?.pushViewController(vc, animated: true)
         }
-        
-       
     }
-    
-    
 }
 
